@@ -11,7 +11,7 @@ class OauthClientTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('oauth_clients')->insert(
+        DB::table('oauth_clients')->insert([
             [
                 'id' => 1,
                 'name' => ' Personal Access Client',
@@ -39,6 +39,6 @@ class OauthClientTableSeeder extends Seeder
                 'password_client' => '0',
                 'revoked' => '0'
             ]
-        );
+        ]);
     }
 }
