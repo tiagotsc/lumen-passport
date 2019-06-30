@@ -11,6 +11,7 @@
     <h3>Nessa tela é possível testar todas as operações da API</h3>
     <blockquote>
         <b>Operações acionadas pelos botões:</b> <br>
+        - Logar => oauth/token<br>
         - Pesquisar => product.index<br>
         - Cadastrar => product.store<br>
         - Editar => product.show<br>
@@ -18,13 +19,23 @@
         - Apagar => product.destroy<br><br>
         Obs: No carregar da tela é feita a autenticação do cliente para pegar o token de acesso e com isso é possível executar todas as operações de CRUD.
     </blockquote>
-    <label for="">Token de acesso recebido na autenticação</label><br>
+    <label for="">Token de acesso dessa aplicação</label><br>
     <input type="text" id="token" readonly><br><br>
     <!-- <input type="text" class="teste" name="campo1[]" >
     <input type="text" class="teste" name="campo2[]" >
     <input type="text" class="teste" name="campo3[]" >
     
     <button id="testa">Testando</button> -->
+
+    <div>
+        <h4>Logar</h4>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="usuario.teste@teste.com.br">
+        <label for="password"></label>
+        <input type="password" name="password" id="password" value="123">
+        <button id="logar">Logar</button>
+    </div>
+
     <div>
         <h4>Cadastrar / Editar</h4>
         <label for="name">Nome</label>
@@ -96,6 +107,24 @@
  }); */
 
  $("#update").hide();
+
+ $("#logar").on("click", function(){
+    let url = 'http://localhost/oauth/token';
+    $.post( url, {
+    "grant_type": "password",
+    "scope": "*",
+    "client_id": "2",
+    "client_secret": "1VUPQqxNSCVuYY00vhQ3obSTJeh5JpoAKipGwNOm",
+    "username": $("#email").val(),
+    "password": $("#password").val()
+    }, function( data ) {
+        if(data.access_token){
+            alert('Logado com sucesso! Seu token de acesso: '+data.access_token);
+        }
+    }, "json").fail(function() {
+        alert( "Login ou senha inválido!" );
+    });
+ });
 
  $(".order").on("click", function(event){
      event.preventDefault();
