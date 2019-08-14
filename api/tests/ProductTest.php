@@ -51,7 +51,7 @@ class ProductTest extends TestCase
     public function testDestroy()
     {
         $this->withoutMiddleware();
-        $product = \App\Models\Product::where('name','Nebulizador')->first();
+        $product = \App\Models\Product::first();
         $this->json('DELETE', 'api/v1/products/'.$product->id)->seeJson();
     }
 
