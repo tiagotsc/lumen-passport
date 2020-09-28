@@ -42,15 +42,15 @@ class ProductTest extends TestCase
     {
         $this->withoutMiddleware();
         $product = \App\Models\Product::first();
-        $product->name = $product->name.'-'.date('s');
-        $product->brand = $product->brand.'-'.date('s');
+        $product->name = $product->name.'es';
+        $product->brand = $product->brand.'es';
         $this->json('PUT', 'api/v1/products/'.$product->id, $product->toArray())->seeJson();
     }
 
     public function testDestroy()
     {
         $this->withoutMiddleware();
-        $product = \App\Models\Product::where('name','Nebulizador')->first();
+        $product = \App\Models\Product::where('name','Nebulizadores')->first();
         $this->json('DELETE', 'api/v1/products/'.$product->id)->seeJson();
     }
 
