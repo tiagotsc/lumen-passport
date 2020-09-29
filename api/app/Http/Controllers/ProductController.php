@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        parse_str($request->data, $dataItems);
+        return response()->json(Product::orderBy('name')->get());
+        /*parse_str($request->data, $dataItems);
         $where = [];
         foreach($dataItems as $field => $value){
             if(trim($value) !=''){
@@ -30,7 +31,7 @@ class ProductController extends Controller
             $fieldOrder = 'name';
             $typeOrder = 'asc';
         }
-        return response()->json(Product::where($where)->orderBy($fieldOrder,$typeOrder)->paginate($request->items));
+        return response()->json(Product::where($where)->orderBy($fieldOrder,$typeOrder)->paginate($request->items));*/
     }
 
     /**
